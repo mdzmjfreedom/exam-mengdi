@@ -121,6 +121,14 @@ export default function ExcelWorkspace() {
           showToast('success', `已自动应用已记忆的模板映射规则（${confidence.mapped}/${confidence.total} 个必填字段已匹配）`);
         } else {
           showToast('success', `智能识别完成：${confidence.mapped}/${confidence.total} 个必填字段已自动匹配`);
+          // Save auto-mapping to DB for template learning (so next time it's "remembered")
+          try {
+            await fetch('/api/mappings', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ fingerprint: result.fingerprint, mapping: JSON.stringify(autoMapping) }),
+            });
+          } catch { /* ignore */ }
         }
       }
     } catch (err: any) {
@@ -155,6 +163,7 @@ export default function ExcelWorkspace() {
     setShowMappingModal(false);
     setPendingParseResult(null);
     setIsProcessing(false);
+    setActiveTab('upload');
   };
 
   const handleAddRow = () => {
