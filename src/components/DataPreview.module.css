@@ -129,3 +129,9 @@
 .deleteBtn:hover {
   background: var(--error-bg);
 }
+
+.unmapped {
+  color: var(--warning);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
