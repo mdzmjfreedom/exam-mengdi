@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Order {
+  id              String   @id @default(cuid())
+  externalCode    String?  // 外部编码
+  senderName      String   // 发件人姓名
+  senderPhone     String   // 发件人电话
+  senderAddress   String   // 发件人地址
+  receiverName    String   // 收件人姓名
+  receiverPhone   String   // 收件人电话
+  receiverAddress String   // 收件人地址
+  weight          Float    // 重量 (kg)
+  count           Int      // 件数
+  tempZone        String   // 温层
+  remark          String?  // 备注
+  createdAt       DateTime @default(now())
+}
+
+model TemplateMapping {
+  id          String   @id @default(cuid())
+  fingerprint String   @unique // Excel表头指纹
+  mapping     String   // JSON string of mapping rules
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

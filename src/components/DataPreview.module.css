@@ -1,0 +1,131 @@
+.tableContainer {
+  width: 100%;
+  max-height: 600px;
+  overflow: auto;
+  border-radius: var(--radius-sm);
+  background: var(--surface-color);
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.table th, .table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+  white-space: nowrap;
+  position: relative;
+}
+
+.table th {
+  background: var(--bg-color);
+  font-weight: 600;
+  color: var(--text-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 1px 0 var(--border-color);
+}
+
+.stickyIndex {
+  position: sticky;
+  left: 0;
+  background: var(--bg-color);
+  z-index: 11;
+  text-align: center;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  width: 60px;
+}
+
+.table tbody tr:hover td {
+  background-color: var(--primary-light);
+}
+
+.table tbody tr.rowError td:not(.cellError):not(.stickyIndex) {
+  background-color: var(--error-bg);
+  opacity: 0.8;
+}
+
+.cellError {
+  background-color: var(--error-bg) !important;
+  color: var(--error);
+  box-shadow: inset 0 0 0 1px var(--error);
+}
+
+.cellContent {
+  cursor: pointer;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.editInput {
+  width: 100%;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  outline: none;
+  font-size: inherit;
+  font-family: inherit;
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.required {
+  color: var(--error);
+  margin-left: 0.25rem;
+}
+
+/* Tooltip for error message */
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--error);
+  color: white;
+  text-align: center;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  z-index: 20;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 5px;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--error) transparent transparent transparent;
+}
+
+.cellError:hover .tooltip {
+  visibility: visible;
+  animation: fadeIn 0.2s ease;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: var(--error);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.deleteBtn:hover {
+  background: var(--error-bg);
+}
